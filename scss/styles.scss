@@ -1,0 +1,385 @@
+/* ---Reset & Utilities --- */
+
+/*This is to clear the browser's default formatting of HTML elements, removing potential inconsistencies between different browsers.*/
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* For unordered list */
+ul,
+li {
+  list-style: none;
+}
+
+/*For links*/
+a {
+  text-decoration: none;
+}
+
+@mixin flex{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+/* ---- Base Rules ---- */
+body {
+  background: #1db8e7;
+  background: linear-gradient(0deg, #1180a2 0%, #0b5369 100%);
+  margin: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: #fff;
+}
+
+/* Typography */
+.header__title {
+  font-family: "Fira Sans", sans-serif;
+  font-size: 4em;
+  margin: 0 1rem;
+  padding: 0 0 3rem 0;
+}
+
+.section__title {
+  border-bottom: 1px solid #cc1;
+  font-family: "Oxygen", Sans-Serif;
+  font-size: 3em;
+  color: #fff;
+}
+
+.para {
+  line-height: 1.6em;
+  color: #eee;
+}
+
+/* ---- Layout Rules---- */
+main {
+  margin: 10vh 1em 10vh;
+}
+
+.main__hero {
+  min-height: 40vh;
+  padding-top: 5rem;
+}
+
+section {
+  position: relative;
+  min-height: 80vh;
+}
+
+/* ---- Module Rules ---- */
+
+/* Mobile Styles Layout */
+/* Navigation Styles*/
+.menu-btn {
+  position: fixed;
+  -webkit-appearance: none;
+  outline: none;
+  border: 0.2rem solid #1db8e7;
+  border-radius: 50%;
+  height: 3.5rem;
+  width: 3.5rem;
+  top: 1rem;
+  right: 1rem;
+  font-size: 4rem;
+  cursor: pointer;
+  z-index: 100;
+
+  &::before {
+    position: absolute;
+    content: "☰";
+    color: #fff;
+    font-size: 1.8rem;
+    margin: 0.3rem 0.8rem;
+  }
+
+  &:checked::before {
+    content: "✖";
+    position: absolute;
+  }
+
+  &:checked ~ .page__header{
+    visibility: visible;
+    z-index: 5;
+  }
+}
+
+/* Header Styles */
+.page__header {
+  position: fixed;
+  background: rgba(0, 204, 255, 0.8);
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  visibility: hidden;
+}
+
+/* Navbar Styles */
+.navbar__menu {
+  @include flex;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(5, 5, 5, 0.404);
+  box-shadow: 0.1rem 0.1rem 0.5rem #000;
+}
+
+#navbar__list {
+  display: flex;
+  gap: 4rem;
+  width: 100%;
+  text-align: center;
+  flex-direction: column;
+}
+
+.menu-link {
+  color: #0b5369;
+  padding: 1rem 1rem;
+  font-size: 1.2rem;
+  background: #fff;
+  border-radius: 0.2rem;
+
+  &.active {
+    background: #1db8e7;
+    border-radius: 50%;
+    color: #fff;
+  }
+}
+
+/* Footer Styles */
+.page__footer {
+  background: #1db8e7;
+  padding: 3em;
+  box-shadow: 0.5rem 0.5rem 1rem #000;
+}
+
+.page__footer-para {
+  color: #fff;
+}
+
+/* Landing Container Styles */
+.landing__container {
+  padding: 1em;
+  text-align: left;
+}
+
+section:nth-of-type(even) .landing__container {
+  margin-right: 0;
+  margin-left: auto;
+  text-align: right;
+}
+
+/* Background Circles */
+/* Note that background circles are created with psuedo elements before and after */
+/* Circles appear to be random do to use of :nth-of-type psuedo class */
+
+section:nth-of-type(odd) .landing__container::before {
+  content: "";
+  background: rgba(255, 255, 255, 0.187);
+  position: absolute;
+  z-index: -5;
+  width: 20vh;
+  height: 20vh;
+  border-radius: 50%;
+  opacity: 0;
+  transition: ease 0.5s all;
+}
+
+section:nth-of-type(even) .landing__container::before {
+  content: "";
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  position: absolute;
+  top: 3em;
+  right: 3em;
+  z-index: -5;
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50%;
+  opacity: 0;
+  transition: ease 0.5s all;
+}
+
+section:nth-of-type(3n) .landing__container::after {
+  content: "";
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -5;
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50%;
+  opacity: 0;
+  transition: ease 0.5s all;
+}
+
+section:nth-of-type(3n + 1) .landing__container::after {
+  content: "";
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  position: absolute;
+  right: 20vw;
+  bottom: -5em;
+  z-index: -5;
+  width: 15vh;
+  height: 15vh;
+  border-radius: 50%;
+  opacity: 0;
+  transition: ease 0.5s all;
+}
+
+/* Section Active Styles */
+section.active {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+section.active .landing__container::before {
+  opacity: 1;
+  animation: rotate 4s linear 0s infinite forwards;
+}
+
+section.active .landing__container::after {
+  opacity: 1;
+  animation: rotate 5s linear 0s infinite forwards reverse;
+}
+
+/* Section Active Styles Keyframe Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) translate(-1em) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translate(-1em) rotate(-360deg);
+  }
+}
+
+/*----Responsive View on Different Devices -----*/
+/*----Media Queries for other sizes -----*/
+@media screen and (min-width: 520px) {
+  .landing__container {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .header__title{
+    font-size: 6em;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .landing__container {
+    max-width: 80%;
+    padding: 1rem;
+  }
+
+  .header__title{
+    margin: 3rem 1rem;
+    font-size: 7em;
+  }
+
+  .menu-btn {
+    visibility: hidden;
+  }
+
+  /* Header Styles */
+  .page__header {
+    height: 6em;
+    z-index: 10;
+    visibility: visible;
+  }
+
+  /* Navbar Styles */
+  .navbar__menu {
+    height: 5em;
+    background: #0b5369;
+  }
+
+  #navbar__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .menu-link {
+    color: #fff;
+    padding: 1rem 1rem;
+    font-size: 1.2rem;
+    background: none;
+    border-radius: 0.2rem;
+
+    &:hover{
+      background: rgba(46, 46, 46, 0.3);
+      border-radius: 50%;
+    }
+
+    &.active {
+      background: #1db8e7;
+      border-radius: 50%;
+      color: #fff;
+    }
+  }
+}
+
+@media screen and (min-width: 1150px) {
+
+  main {
+    @include flex;
+    flex-direction: column;
+  }
+
+  .main__hero {
+    @include flex;
+    width: 70rem;
+    padding: 8rem 0 6rem 1rem ;
+    top:0;
+    margin: 0;
+  }
+
+  section {
+    position: relative;
+    max-width: 70rem;
+  }
+
+  .landing__container {
+    max-width: 80%;
+    padding: 1rem;
+  }
+
+  .header__title{
+    font-size: 7.5em;
+    margin: 2vh 0;
+  }
+
+  .para{
+    font-size: 1.2rem;
+  }
+
+  .section__title{
+    font-size: 3.5rem;
+  }
+}
+
